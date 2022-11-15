@@ -40,6 +40,29 @@ public class NhanVienRepo {
         return null;
     }
 
+    public boolean add(NhanVienModel Nv) {
+        String query = "INSERT INTO [dbo].[NhanVien]\n"
+                + "           ([MaNV]\n"
+                + "           ,[TenNV]\n"
+                + "           ,[SDT]\n"
+                + "           ,[NgaySinh]\n"
+                + "           ,[MaLuong])\n"
+                + "     VALUES\n"
+                + "           (?,?,?,?,?)";
+        int check = 0;
+        try ( Connection con = SQLServerConnect.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, Nv.getMaNV());
+            ps.setObject(2, Nv.getTenNV());
+            ps.setObject(3, Nv.getSdt());
+            ps.setObject(4, Nv.getNgaySinh());
+            ps.setObject(5, Nv.getMaLuong());
+            check = ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return check > 0;
+    }
+
     public boolean delete(String MaNV) {
         int check = 0;
         String query = "DELETE FROM [dbo].[NhanVien]\n"

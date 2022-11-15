@@ -16,4 +16,6 @@ public interface NhanVienSer {
     List<NhanVienModel> getAll();
 
     String delete(String maNV);
+    
+    String add(NhanVienModel Nv);
 }
