@@ -18,7 +18,7 @@ public class SQLServerConnect {
     public static final String PORT = "1433";
     public static final String DBNAME = "PRO1041_IT17316_N5";
     public static final String USERNAME = "sa";
-    public static final String PASSWORD = "123456";
+    public static final String PASSWORD = "12345";
 
     public static Connection getConnection() {
         // Create a variable for the connection string.

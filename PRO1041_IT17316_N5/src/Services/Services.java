@@ -4,10 +4,16 @@
  */
 package Services;
 
+import ViewModels.ModelSP;
+import java.util.List;
+
 /**
  *
  * @author nhatc
  */
 public interface Services {
-    
+
+    List<ModelSP> getAll();
+
+    List<ModelSP> timKiem(String ten);
 }
