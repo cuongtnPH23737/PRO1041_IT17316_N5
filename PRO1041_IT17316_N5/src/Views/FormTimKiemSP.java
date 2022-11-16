@@ -4,7 +4,7 @@
  */
 package Views;
 
-import Services.Implements.ServiceImplements;
+import Services.Implements.ServiceTimKemSPImplements;
 import ViewModels.ModelSP;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ import javax.swing.text.Segment;
 public class FormTimKiemSP extends javax.swing.JFrame {
     private DefaultTableModel dm = new DefaultTableModel();
     private List<ModelSP>list = new ArrayList<>();
-    private Services.Services sv = new ServiceImplements();
+    private Services.Services sv = new ServiceTimKemSPImplements();
     /**
      * Creates new form FormTimKiemSP
      */
