@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author nhatc
  */
-public class ServiceImplements implements Services.Services {
+public class ServiceTimKemSPImplements implements Services.Services {
 
     private Reponsitories.Reponsitory rp = new Reponsitory();
 
