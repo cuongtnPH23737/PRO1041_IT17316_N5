@@ -4,7 +4,6 @@
  */
 package Reponsitories;
 
-import DomainModels.KhachHangDM;
 import DomainModels.NhanVienModel;
 import Ultilities.SQLServerConnect;
 import java.sql.Connection;
@@ -40,6 +39,29 @@ public class NhanVienRepo {
         return null;
     }
 
+    public boolean add(NhanVienModel Nv) {
+        String query = "INSERT INTO [dbo].[NhanVien]\n"
+                + "           ([MaNV]\n"
+                + "           ,[TenNV]\n"
+                + "           ,[SDT]\n"
+                + "           ,[NgaySinh]\n"
+                + "           ,[MaLuong])\n"
+                + "     VALUES\n"
+                + "           (?,?,?,?,?)";
+        int check = 0;
+        try ( Connection con = SQLServerConnect.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, Nv.getMaNV());
+            ps.setObject(2, Nv.getTenNV());
+            ps.setObject(3, Nv.getSdt());
+            ps.setObject(4, Nv.getNgaySinh());
+            ps.setObject(5, Nv.getMaLuong());
+            check = ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return check > 0;
+    }
+
     public boolean delete(String MaNV) {
         int check = 0;
         String query = "DELETE FROM [dbo].[NhanVien]\n"
@@ -53,7 +75,31 @@ public class NhanVienRepo {
         return check > 0;
     }
 
+    public boolean Update(NhanVienModel Nv, String Ma) {
+        String query = "UPDATE [dbo].[NhanVien]\n"
+                + "   SET [MaNV] = ?\n"
+                + "      ,[TenNV] = ?\n"
+                + "      ,[SDT] = ?\n"
+                + "      ,[NgaySinh] = ?\n"
+                + "      ,[MaLuong] = ?\n"
+                + " WHERE MaNV = ?";
+
+        int check = 0;
+        try ( Connection con = SQLServerConnect.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, Nv.getMaNV());
+            ps.setObject(2, Nv.getTenNV());
+            ps.setObject(3, Nv.getSdt());
+            ps.setObject(4, Nv.getNgaySinh());
+            ps.setObject(5, Nv.getMaLuong());
+            ps.setObject(6, Nv.getMaNV());
+            check = ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return check > 0;
+    }
+
     public static void main(String[] args) {
-        new KhachHangRep().getAll().forEach(s -> System.out.println(s.toString()));
+        new NhanVienRepo().getAll().forEach(s -> System.out.println(s.toString()));
     }
 }
