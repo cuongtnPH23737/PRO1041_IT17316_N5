@@ -4,10 +4,27 @@
  */
 package Services.Implements;
 
+import Reponsitories.Reponsitory;
+import ViewModels.ModelSP;
+import java.util.List;
+
 /**
  *
  * @author nhatc
  */
-public class ServiceImplements {
-    
+public class ServiceImplements implements Services.Services {
+
+    private Reponsitories.Reponsitory rp = new Reponsitory();
+
+    @Override
+    public List<ModelSP> getAll() {
+
+        return rp.getAll();
+    }
+
+    @Override
+    public List<ModelSP> timKiem(String ten) {
+        return rp.timKiem(ten);
+    }
+
 }
