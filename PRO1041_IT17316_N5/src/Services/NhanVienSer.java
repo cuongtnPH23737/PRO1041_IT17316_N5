@@ -18,4 +18,6 @@ public interface NhanVienSer {
     String delete(String maNV);
     
     String add(NhanVienModel Nv);
+    
+    String Update(NhanVienModel Nv, String Ma);
 }

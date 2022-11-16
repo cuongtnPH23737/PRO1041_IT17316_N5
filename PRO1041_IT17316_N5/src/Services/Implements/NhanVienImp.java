@@ -46,4 +46,14 @@ public class NhanVienImp implements NhanVienSer {
         return "Thêm NV thất bại Hoặc NV đã tồn tại !";
         }
     }
+
+    @Override
+    public String Update(NhanVienModel Nv, String Ma) {
+        boolean update = NvRepo.Update(Nv, Ma);
+        if (update) {
+            return "Update Nv ✔️";
+        } else {
+            return "Update NV False !";
+        }
+    }
     }

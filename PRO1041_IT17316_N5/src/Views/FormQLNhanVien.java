@@ -289,6 +289,17 @@ public class FormQLNhanVien extends javax.swing.JFrame {
 
     private void BtSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtSuaActionPerformed
         // TODO add your handling code here:
+        NhanVienModel NvU = ListNV.get(TBbang.getSelectedRow());
+        String maNV = txtMaNV.getText();
+        String tenNV = txtTenNV.getText();
+        String Sdt = txtSDT.getText();
+        String ngaySinh = txtNgaySinh.getText();
+        String maLuong = txtMaluong.getText();
+        NhanVienModel Nv = new NhanVienModel(maNV, tenNV, Integer.valueOf(Sdt), ngaySinh, maLuong);
+        JOptionPane.showMessageDialog(rootPane, NVSer.Update(Nv, NvU.getMaNV()));
+        ListNV = NVSer.getAll();
+         LoadData(ListNV);
+        
     }//GEN-LAST:event_BtSuaActionPerformed
     public void resetForm() {
         txtMaNV.setText("");
@@ -326,18 +337,10 @@ public class FormQLNhanVien extends javax.swing.JFrame {
     }//GEN-LAST:event_TBbangMouseClicked
 
     private void BtXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtXoaActionPerformed
-        int VitriDelete = TBbang.getSelectedRow();
         String maNV = txtMaNV.getText();
-        if (VitriDelete == -1) {
-            JOptionPane.showMessageDialog(this, "Hãy chọn 1 dòng rồi xóa");
-        } else if (ListNV.size() == 0) {
-            JOptionPane.showMessageDialog(this, "Không có thông tin NV để xóa !");
-        } else {
-            ListNV.remove(VitriDelete);
-            String Xoa = NVSer.delete(maNV);
-            LoadData(ListNV);
-            JOptionPane.showMessageDialog(this, "Đã xóa Nhân Viên !");
-        }
+        JOptionPane.showMessageDialog(rootPane, NVSer.delete(maNV));
+        ListNV = NVSer.getAll();
+        LoadData(ListNV);
     }//GEN-LAST:event_BtXoaActionPerformed
 
     private void BtLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtLuuActionPerformed
