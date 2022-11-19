@@ -9,6 +9,7 @@ import Ultilities.SQLServerConnect;
 import ViewModels.TaiKhoanView;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -50,10 +51,10 @@ public class TaiKhoanRepository{
         return false;
     }
     
-    final String dang_ky_tk = "insert taikhoan values(?,?,?,?)";
+    
     public Boolean dangKyTkKhachHang(TaiKhoan taiKhoan){
         try {      
-            if(SQLServerConnect.ExcuteDungna(dang_ky_tk,taiKhoan.getMaTk(),taiKhoan.getEmail(),taiKhoan.getPassword(),taiKhoan.getLoaiTk())==0){
+            if(SQLServerConnect.ExcuteDungna(them,taiKhoan.getMaTk(),taiKhoan.getEmail(),taiKhoan.getPassword(),taiKhoan.getLoaiTk())==0){
                 return false;
             }
         } catch (Exception e) {
@@ -63,6 +64,71 @@ public class TaiKhoanRepository{
         return true;
     }
     
+    final String select_all = "select * from taikhoan";
+    public ArrayList<TaiKhoan> getAll(){
+        ArrayList<TaiKhoan> list=new ArrayList<>();
+        try {      
+            ResultSet rs=SQLServerConnect.getDataFromQuery(select_all);
+            while (rs.next()) {                
+                list.add(new TaiKhoan(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4)));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e);
+        }
+        return list;
+    }
+    
+    final String them = "insert taikhoan values(?,?,?,?)";
+    public Boolean them(TaiKhoan taiKhoan){
+        try {      
+            if(SQLServerConnect.ExcuteDungna(
+                    them, 
+                    taiKhoan.getMaTk(),
+                    taiKhoan.getEmail(),
+                    taiKhoan.getPassword(),
+                    taiKhoan.getLoaiTk())==0){
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e);
+        }
+        return true;
+    }
+    
+    final String sua = "update taikhoan set email=?,password=?,loaitk=? where matk=?";
+    public Boolean sua(TaiKhoan taiKhoan,String matk){
+        try {      
+            if(SQLServerConnect.ExcuteDungna(
+                    sua, 
+                    taiKhoan.getEmail(),
+                    taiKhoan.getPassword(),
+                    taiKhoan.getLoaiTk(),
+                    matk)==0){
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e);
+        }
+        return true;
+    }
+    
+    final String xoa = "delete taikhoan where matk=?";
+    public Boolean xoa(String matk){
+        try {      
+            if(SQLServerConnect.ExcuteDungna(
+                    xoa,
+                    matk)==0){
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e);
+        }
+        return true;
+    }
     
     public static void main(String[] args) {
         TaiKhoanRepository taiKhoanRepository=new TaiKhoanRepository();
