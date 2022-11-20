@@ -8,6 +8,7 @@ import DomainModels.TaiKhoan;
 import Reponsitories.TaiKhoanRepository;
 import Services.ITaiKhoanService;
 import ViewModels.TaiKhoanView;
+import java.util.ArrayList;
 
 /**
  *
@@ -23,7 +24,7 @@ public class TaiKhoanService implements ITaiKhoanService {
 
     @Override
     public TaiKhoanView dangNhap(TaiKhoanView taiKhoanView) {
-        TaiKhoan taiKhoan=new TaiKhoan();
+        TaiKhoan taiKhoan = new TaiKhoan();
         taiKhoan.setEmail(taiKhoanView.getEmail());
         taiKhoan.setPassword(taiKhoanView.getPassword());
         return taiKhoanRepository.dangNhap(taiKhoan);
@@ -31,7 +32,7 @@ public class TaiKhoanService implements ITaiKhoanService {
 
     @Override
     public Boolean checkTonTai(TaiKhoanView taiKhoanView) {
-        TaiKhoan taiKhoan=new TaiKhoan();
+        TaiKhoan taiKhoan = new TaiKhoan();
         taiKhoan.setEmail(taiKhoanView.getEmail());
         taiKhoan.setMaTk(taiKhoanView.getMaTk());
         return taiKhoanRepository.checkTonTai(taiKhoan);
@@ -39,11 +40,52 @@ public class TaiKhoanService implements ITaiKhoanService {
 
     @Override
     public Boolean dangKyTkKhachHang(TaiKhoanView taiKhoanView) {
-        TaiKhoan taiKhoan=new TaiKhoan();
+        TaiKhoan taiKhoan = new TaiKhoan();
         taiKhoan.setMaTk(taiKhoanView.getMaTk());
         taiKhoan.setEmail(taiKhoanView.getEmail());
         taiKhoan.setPassword(taiKhoanView.getPassword());
         return taiKhoanRepository.dangKyTkKhachHang(taiKhoan);
+    }
+
+    @Override
+    public ArrayList<TaiKhoanView> getAll() {
+        ArrayList<TaiKhoanView> listView = new ArrayList<>();
+        ArrayList<TaiKhoan> list = taiKhoanRepository.getAll();
+
+        for (TaiKhoan taiKhoan : list) {
+            listView.add(new TaiKhoanView(
+                    taiKhoan.getMaTk(),
+                    taiKhoan.getEmail(),
+                    taiKhoan.getPassword(),
+                    taiKhoan.getLoaiTk()));
+        }
+
+        return listView;
+    }
+
+    @Override
+    public Boolean them(TaiKhoanView taiKhoanView) {
+        TaiKhoan taiKhoan = new TaiKhoan(
+                taiKhoanView.getMaTk(),
+                taiKhoanView.getEmail(),
+                taiKhoanView.getPassword(),
+                taiKhoanView.getLoaiTk());
+        return taiKhoanRepository.them(taiKhoan);
+    }
+
+    @Override
+    public Boolean sua(TaiKhoanView taiKhoanView, String matk) {
+        TaiKhoan taiKhoan = new TaiKhoan(
+                taiKhoanView.getMaTk(),
+                taiKhoanView.getEmail(),
+                taiKhoanView.getPassword(),
+                taiKhoanView.getLoaiTk());
+        return taiKhoanRepository.sua(taiKhoan, matk);
+    }
+
+    @Override
+    public Boolean xoa(String matk) {
+        return taiKhoanRepository.xoa(matk);
     }
 
 }

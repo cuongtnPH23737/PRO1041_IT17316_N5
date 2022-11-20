@@ -6,6 +6,7 @@ package Services;
 
 import DomainModels.TaiKhoan;
 import ViewModels.TaiKhoanView;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,4 +19,12 @@ public interface ITaiKhoanService {
     Boolean checkTonTai(TaiKhoanView taiKhoanView);
 
     Boolean dangKyTkKhachHang(TaiKhoanView taiKhoanView);
+    
+    ArrayList<TaiKhoanView> getAll();
+    
+    Boolean them(TaiKhoanView taiKhoanView);
+    
+    Boolean sua(TaiKhoanView taiKhoanView,String matk);
+    
+    Boolean xoa(String matk);
 }
