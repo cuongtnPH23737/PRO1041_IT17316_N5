@@ -14,17 +14,19 @@ public class NhanVienModel {
     private int Sdt;
     private String NgaySinh;
     private String MaLuong;
+    private String MaTk;
     //Contructor
 
     public NhanVienModel() {
     }
 
-    public NhanVienModel(String MaNV, String TenNV, int Sdt, String NgaySinh, String MaLuong) {
+    public NhanVienModel(String MaNV, String TenNV, int Sdt, String NgaySinh, String MaLuong, String MaTk) {
         this.MaNV = MaNV;
         this.TenNV = TenNV;
         this.Sdt = Sdt;
         this.NgaySinh = NgaySinh;
         this.MaLuong = MaLuong;
+        this.MaTk = MaTk;
     }
 
     public String getMaNV() {
@@ -66,13 +68,22 @@ public class NhanVienModel {
     public void setMaLuong(String MaLuong) {
         this.MaLuong = MaLuong;
     }
+
+    public String getMaTk() {
+        return MaTk;
+    }
+
+    public void setMaTk(String MaTk) {
+        this.MaTk = MaTk;
+    }
+    
+    
     public Object[] toDataRow()
-    {return new Object[]{MaNV,TenNV,Sdt,NgaySinh,MaLuong};}
+    {return new Object[]{MaNV,TenNV,Sdt,NgaySinh,MaLuong, MaTk};}
     //To String
 
     @Override
     public String toString() {
-        return "NhanVienModel{" + "MaNV=" + MaNV + ", TenNV=" + TenNV + ", Sdt=" + Sdt + ", NgaySinh=" + NgaySinh + ", MaLuong=" + MaLuong + '}';
-    }
-    
+        return "NhanVienModel{" + "MaNV=" + MaNV + ", TenNV=" + TenNV + ", Sdt=" + Sdt + ", NgaySinh=" + NgaySinh + ", MaLuong=" + MaLuong + ", MaTk=" + MaTk + '}';
+    }  
 }

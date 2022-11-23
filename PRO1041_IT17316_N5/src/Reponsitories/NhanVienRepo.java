@@ -25,12 +25,13 @@ public class NhanVienRepo {
                 + "      ,[SDT]\n"
                 + "      ,[NgaySinh]\n"
                 + "      ,[MaLuong]\n"
+                + "      ,[MaTK]\n"
                 + "  FROM [dbo].[NhanVien]";
         try ( Connection cn = SQLServerConnect.getConnection();  PreparedStatement ps = cn.prepareStatement(query)) {
             ResultSet rs = ps.executeQuery();
             List<NhanVienModel> list = new ArrayList<>();
             while (rs.next()) {
-                list.add(new NhanVienModel(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5)));
+                list.add(new NhanVienModel(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getString(6)));
             }
             return list;
         } catch (SQLException e) {
@@ -45,9 +46,10 @@ public class NhanVienRepo {
                 + "           ,[TenNV]\n"
                 + "           ,[SDT]\n"
                 + "           ,[NgaySinh]\n"
-                + "           ,[MaLuong])\n"
+                + "           ,[MaLuong]\n"
+                + "           ,[MaTK])\n"
                 + "     VALUES\n"
-                + "           (?,?,?,?,?)";
+                + "           (?,?,?,?,?,?)";
         int check = 0;
         try ( Connection con = SQLServerConnect.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, Nv.getMaNV());
@@ -55,6 +57,7 @@ public class NhanVienRepo {
             ps.setObject(3, Nv.getSdt());
             ps.setObject(4, Nv.getNgaySinh());
             ps.setObject(5, Nv.getMaLuong());
+            ps.setObject(6, Nv.getMaTk());
             check = ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace(System.out);
@@ -82,6 +85,7 @@ public class NhanVienRepo {
                 + "      ,[SDT] = ?\n"
                 + "      ,[NgaySinh] = ?\n"
                 + "      ,[MaLuong] = ?\n"
+                + "      ,[MaTK] = ?\n"
                 + " WHERE MaNV = ?";
 
         int check = 0;
@@ -91,7 +95,8 @@ public class NhanVienRepo {
             ps.setObject(3, Nv.getSdt());
             ps.setObject(4, Nv.getNgaySinh());
             ps.setObject(5, Nv.getMaLuong());
-            ps.setObject(6, Nv.getMaNV());
+            ps.setObject(6, Nv.getMaTk());
+            ps.setObject(7, Nv.getMaNV());
             check = ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace(System.out);
